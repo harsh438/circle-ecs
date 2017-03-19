@@ -9,10 +9,10 @@ JQ="jq --raw-output --exit-status"
 
 deploy_image() {
 
-	autorization_token=$(aws ecr get-authorization-token --registry-ids $account_id --output text --query authorizationData[].authorizationToken | base64 --decode | cut -d: -f2)
-	docker login -u AWS -p $autorization_token -e none https://$account_id.dkr.ecr.us-east-1.amazonaws.com
-	docker tag demo/staging:$CIRCLE_SHA1 $account_id.dkr.ecr.us-east-1.amazonaws.com/staging:$CIRCLE_SHA1
-    	docker push $account_id.dkr.ecr.us-east-1.amazonaws.com/staging:$CIRCLE_SHA1
+	autorization_token=$(aws ecr get-authorization-token --registry-ids "213273172953" --output text --query authorizationData[].authorizationToken | base64 --decode | cut -d: -f2)
+	docker login -u AWS -p $autorization_token -e none 213273172953.dkr.ecr.us-east-1.amazonaws.com
+	docker tag demo/staging 213273172953.dkr.ecr.us-east-1.amazonaws.com/staging:$CIRCLE_SHA1
+    	docker push 213273172953.dkr.ecr.us-east-1.amazonaws.com/staging:$CIRCLE_SHA1
 
 }
 
