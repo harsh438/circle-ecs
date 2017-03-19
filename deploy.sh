@@ -9,8 +9,9 @@ JQ="jq --raw-output --exit-status"
 
 deploy_image() {
 
-    docker login -u "harsh438" -p "4Dm1n15tr4t0r" -e "shah.harsh438@gmail.com"
-    docker push bellkev/circle-ecs:$CIRCLE_SHA1 | cat # workaround progress weirdness
+	docker login -u AWS -p $autorization_token -e none https://$account_id.dkr.ecr.us-east-1.amazonaws.com
+	docker tag acmeinc/sample-api:$CIRCLE_SHA1 $account_id.dkr.ecr.us-east-1.amazonaws.com/staging:$CIRCLE_SHA1
+    	docker push $account_id.dkr.ecr.us-east-1.amazonaws.com/staging:$CIRCLE_SHA1
 
 }
 
